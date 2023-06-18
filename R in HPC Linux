@@ -1,0 +1,43 @@
+#Install pure R on HPC cluster (Linux)
+#Many HPCs have an R module to be loaded, but could be old version not supporting new Bioinformatics packages
+#Seurat and SeuratDisk are among this kind.
+#We need to create a special environment using conda
+#In order to handle h5Seurat files in Seurat, we need hdf5r insttlled in R.
+#The most hassle-free approach is to install r-hdf5r in an isolated environment first, it will bring in appropriate compatible version of r-base as necessary "dependencies".
+#Currently, the latest version of r-hdf5r is version 1.3.8
+
+conda create -n Bio-R
+
+conda activate Bio-R
+
+conda install -c "conda-forge/label/gcc7" r-hdf5r=1.3.8
+
+R
+
+install.packages("Seurat")
+
+install.packages("remotes")
+
+#https://satijalab.org/seurat/articles/install.html
+
+#remotes::install_github("satijalab/seurat", "seurat5")
+
+remotes::install_github("mojaveazure/seurat-disk")
+
+#environment (similar to upper right on a GUI version)
+
+ls()
+
+#find installed packages
+
+installed.packages()
+
+#find attached packages
+
+search()
+
+#remove packages
+remove.packages()
+
+#exit R
+q()
